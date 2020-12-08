@@ -1,0 +1,117 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    account_circle
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'StudentsList.title'|translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper  ml-sm-32">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a student">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="fullName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'TeachersList.fullname'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student">
+                        <p class="text-truncate">{{student.login_detail.first_name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>{{'GradesList.grade'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student" fxShow.gt-sm>
+                        <p class="text-truncate">{{student.class_name}}&nbsp;{{student.section_name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="fatherName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'TeacherDetail.FatherName'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student">
+                        <p class="text-truncate">
+                            {{student.father_full_name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="contact">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'TeachersList.contact'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student">
+                        <p class="text-truncate">
+                            {{student.phone}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfBirth">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'TeachersList.dateofbirth'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student">
+                        <p class="text-truncate">
+                            {{student.dob}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'StaffDetails.email'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let student">
+                        <p class="text-truncate">
+                            {{student.login_detail.email}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let student; columns: displayedColumns;" class="order" matRipple
+                    [routerLink]="'/library/book-List/'+student.id">
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

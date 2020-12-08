@@ -1,0 +1,48 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+
+// Import app.theme.scss
+@import "app/app.theme";
+.nav .nav-item.nav-collapsable > .children > .nav-item > .nav-link, .nav .nav-item.nav-collapsable > .children > .nav-item.nav-group > .group-title, .nav .nav-item.nav-collapsable > .children > .nav-item.nav-group > .group-items > .nav-item > .nav-link {
+    padding-left: 40px;
+}
+.btn_top_add {
+    background-color: #0a8bd3 !important;
+    color: #ffffff !important;
+}
+.form_border_radius{
+    border-radius:10px;
+}
+.btn_reject {
+    background-color: #d30a0a !important;
+    color: #ffffff !important;
+}
+.toolbar_select .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px;
+}
+@media screen and (max-width: 599px){
+    .orders-table {
+        overflow: auto!important;
+    }
+    .orders-table .mat-cell {
+        min-width: 125px !important;
+    }
+    .orders-table .mat-header-cell {
+        min-width: 125px !important;
+    }
+    .orders-table .order {
+        position: relative;
+        cursor: pointer;
+        height: 84px;
+    }
+    .orders-table mat-footer-row, .orders-table mat-header-row, .orders-table mat-row {
+        min-width: 500px;
+    }
+    .text-truncate {
+        // display: block;
+        // overflow: hidden;
+        // text-overflow: initial;
+        // white-space: initial;
+    }
+    
+}

@@ -1,0 +1,49 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    event_available
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    {{'Attendance.leavestatus' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- / SEARCH -->
+    
+            <button mat-raised-button (click)="openDialogApplyLeave()" class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>{{'Attendance.applyleave'|translate}}</span>
+            </button>
+            
+        </div>
+        <div class="content-card p-24 ">
+            <div class="curriculam" *ngFor= 'let l of leavesDetails'>
+                <mat-card>
+                    <mat-card-title>{{'Attendance.leavereason'|translate}}: {{l?.comment}}</mat-card-title>
+                    <mat-card-content>
+                        <p>{{'Leave_Type' | translate}}: {{l?.leave_type_name}}</p>
+                        <p *ngIf='l?.approved==1'>{{'Attendance.leavestatusapproved'|translate}}: Approved</p>
+                        <p *ngIf='l?.approved==0'>{{'Attendance.leavestatusapproved'|translate}}: Pending</p>
+                        <p *ngIf='l?.approved==2'>{{'Attendance.leavestatusapproved'|translate}}: Rejected</p>
+                        <p>{{'Attendance.fromdate' | translate}}: {{l.date_from}}</p>
+                        <p>{{'Attendance.todate' | translate}}: {{l.date_to}}</p>
+                        <p *ngIf='l?.approved==2'>{{'rejectedReason' | translate}}: {{l?.comment_by_admin}}</p>
+                        <!-- <p *ngIf='l?.comment_by_facility_manager'>Facility Manager Comment: {{l?.comment_by_facility_manager}}</p> -->
+                      </mat-card-content>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>

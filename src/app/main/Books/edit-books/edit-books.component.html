@@ -1,0 +1,103 @@
+<div id="orders" class="page-layout carded fullwidth ">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-16" [routerLink]="'/library/available-books'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    account_circle
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'editBook' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <!-- <div class="search-wrapper  ml-sm-32">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a teacher">
+                </div>
+            </div> -->
+            <!-- / SEARCH -->
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+                <!-- REACTIVE FORM EXAMPLE -->
+
+                <form class="mat-card mat-elevation-z4 p-24 form_border_radius" fxLayout="column" fxLayoutAlign="start"
+                    fxFlex="1 0 auto" name="form" [formGroup]="editBook" (ngSubmit)="onSubmit()">
+
+                    <!-- <div class="h2 mb-24">ADD YOUR NEW ROLE</div> -->
+
+                    <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'NewBook.bookname' | translate}}</mat-label>
+                            <input matInput formControlName="bookName" required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'NewBook.booknumber' | translate}}</mat-label>
+                            <input matInput formControlName="bookNumber" required readonly>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'Book.ISBN' | translate}}</mat-label>
+                            <input matInput formControlName="isbnNo" required readonly>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'Book.authorName' | translate}}</mat-label>
+                            <input matInput formControlName="authorName" required>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'Book.publisherName' | translate}}</mat-label>
+                            <input matInput formControlName="publisherName" required>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'NewBook.categoryname' | translate}}</mat-label>
+                            <mat-select formControlName="categoryName" required>
+                                <mat-option *ngFor="let list2 of categoryList" [value]="list2.id">
+                                    {{list2.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'NewBook.bookcategory' | translate}}</mat-label>
+                            <mat-select formControlName="subCategoryName" required>
+                                <mat-option *ngFor="let list1 of subCategoryList" [value]="list1.id">
+                                    {{list1.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button color="accent" class="submit-button"
+                            aria-label="CREATE AN ACCOUNT">{{'Category.submit' | translate}}</button>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <!-- / CONTENT -->
+
+        </div>

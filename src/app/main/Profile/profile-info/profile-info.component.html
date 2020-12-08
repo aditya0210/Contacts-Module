@@ -1,0 +1,61 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    account_circle
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'ProfileInfo.title' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- / SEARCH -->
+
+            <!-- <button mat-raised-button [routerLink]="'/create-event'" class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>CREATE EVENT</span>
+            </button> -->
+        </div>
+        <div class="" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+            <div class=" profile-section" fxFlex="50">
+                <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="" fxLayoutGap="10px"
+                    fxLayoutGap.xs="0">
+                    <div class="suplier-profile">
+                        <img class="img-fulid" [src]="profileImg">
+                        <button mat-icon-button (click)="onClickIcon()"
+                            aria-label="Example icon button with a open in new tab icon">
+                            <mat-icon>create
+                            </mat-icon>
+                        </button>
+                        <input type="file" id="fileInput" #file (change)="onChangingimg(file.files)"
+                            accept="image/x-png,image/gif,image/jpeg" />
+                        <h2>{{'ProfileInfo.name' | translate}} : {{userDetails?.user?.first_name}}</h2>
+                        <h4>{{'ProfileInfo.email' | translate}} : {{userDetails?.user?.email}}</h4>
+                        <h4>{{'ProfileInfo.designation' | translate}} :
+                            {{userDetails?.user_detail[0]?.fields?.Designation}}</h4>
+                        <h4>{{'schoolName' | translate}} : {{userDetails?.school_detail[0]?.fields?.name}}</h4>
+                        <h4>{{'ProfileInfo.contactnumber' | translate}} :
+                            {{userDetails?.user_detail[0]?.fields?.contact_number}}</h4>
+                        <!-- <h4>Year 2018 - 2021</h4> -->
+                        <h4>{{"ProfileInfo.address"| translate}} : {{userDetails?.user_detail[0]?.fields?.address}}</h4>
+                        <button mat-raised-button type="button" class="btn update-btn"
+                            (click)="raiseRequestDialog()">{{'ProfileInfo.raiserequestmodel' | translate }} </button>
+                        <button mat-raised-button type="button" class=" ml-16 btn update-btn"
+                            (click)="resetPassword()">{{'ProfileInfo.resetPassword' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

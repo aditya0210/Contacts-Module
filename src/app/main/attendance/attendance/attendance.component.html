@@ -1,0 +1,75 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    cast_for_education
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'Attendance.title' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- / SEARCH -->
+    
+            <!-- <button mat-raised-button (click)="openDialogApplyLeave()" class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>{{'Attendance.applyleave' | translate}}</span>
+            </button> -->
+            
+        </div>
+        <div class="content-card p-24 ">
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="center" fxLayout.gt-md="row">
+                <!-- <mat-form-field color="accent" appearance="outline" (click)="picker1.open()">
+                    <mat-label>{{'Attendance.selectdate'| translate}}</mat-label>
+                    <input matInput [matDatepicker]="picker1" [value]="bindDate" (dateChange)="onDateChange('change', $event)" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 startView="multi-year"></mat-datepicker>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline" (click)="picker1.open()">
+                    <mat-label>{{'Attendance.SelectMonth'|translate}}</mat-label>
+                    <input matInput [matDatepicker]="picker1" [max]="maxDate" [formControl]="date" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1
+                                    startView="multi-year"
+                                    (yearSelected)="chosenYearHandler($event)"
+                                    (monthSelected)="chosenMonthHandler($event, picker1)"
+                                    panelClass="example-month-picker">
+                    </mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                fxLayoutGap.xs="0">
+                <button mat-raised-button type="submit" class="btn_top_add" (click)="checkAttendance()">
+                  {{'Attendance.check'|translate}}
+                </button>
+            </div>
+
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="center" fxLayout.gt-md="row">
+                <mat-card class="present_day">
+                    <h2 class="h2 font-weight-600">{{'Attendance.total_present_days'|translate}} <span>{{details?.totalPresentDays}}</span></h2>
+                </mat-card>
+            </div>
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="center" fxLayout.gt-md="row">
+                <mat-card class="absent_day mb-20">
+                    <h2 class="h2 font-weight-600">{{'Attendance.total_absentdays'|translate}} <span>{{details?.totalAbsentDays}}</span></h2>
+                </mat-card>
+            </div>
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="center" fxLayout.gt-md="row">
+                <mat-card class="present_day">
+                    <h2 class="h2 font-weight-600">{{'Attendance.Total_working_days'|translate}} <span>{{details?.totalWorkingDays}}</span></h2>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>

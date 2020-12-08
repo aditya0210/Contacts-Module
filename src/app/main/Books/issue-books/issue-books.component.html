@@ -1,0 +1,164 @@
+<div id="orders" class="page-layout carded fullwidth">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    account_circle
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'IssueBook.title' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper  ml-sm-32">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a book">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <button mat-raised-button [routerLink]="'/library/issued-books-list-Pdf'"
+                class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>{{'TrialBalance.generatereport'|translate}}</span>
+            </button>
+        </div>
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'IssueBook.bookname' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">{{book.book_name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="book_number">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'IssueBook.booknumber' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">{{book.book_number}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="author_name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'Book.authorName' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">{{book.author_name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="student_name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'AssignBooks.StudentName' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.student_name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="issued_date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'AssignBooks.IssueDate' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.issued_date}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Reference Column -->
+                <ng-container matColumnDef="due_date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'AssignBooks.DueDate' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.due_date}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Reference Column -->
+                <ng-container matColumnDef="remaining_days">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'DueDatePassed' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.remaining_days}} {{'Days' | translate}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Name Column -->
+                <!-- <ng-container matColumnDef="bookCategory">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'IssueBook.category' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">
+                            {{book.book_category_id.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container> -->
+
+                <!-- Total Price Column -->
+                <ng-container matColumnDef="booksubCategory">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-md>
+                        {{'IssueBook.subcategory' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-md>
+                        <p class="total-price text-truncate">
+                            {{book.book_sub_category_id.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Payment Column -->
+                <!-- <ng-container matColumnDef="payment">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>Payment</mat-header-cell>
+                        <mat-cell *matCellDef="let order"   fxShow.gt-sm>
+                            <p class="text-truncate">
+                                {{order.payment.method}}
+                            </p>
+                        </mat-cell>
+                    </ng-container> -->
+
+                <!-- Status Column -->
+                <!-- <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <p class="status text-truncate h6 p-4" [ngClass]="order.status[0].color">
+                                {{order.status[0].name}}
+                            </p>
+                        </mat-cell>
+                    </ng-container> -->
+
+                <!-- Date Column -->
+                <!-- <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>Date</mat-header-cell>
+                        <mat-cell *matCellDef="let order"   fxShow.gt-sm>
+                            <p class="text-truncate">
+                                {{order.date}}
+                            </p>
+                        </mat-cell>
+                    </ng-container> -->
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let book; columns: displayedColumns;" class="order" matRipple>
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

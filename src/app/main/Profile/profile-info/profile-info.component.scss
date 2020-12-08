@@ -1,0 +1,45 @@
+@import "src/@fuse/scss/fuse";
+$break-small: 767px;
+:host {
+    .cust-container{
+        padding: 20px 40px;
+    }
+    form {
+        width: 100%;
+    }
+    .profile-section, .profile-form{
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    @include media-breakpoint('xs') {
+        margin-bottom: 20px !important;
+    }
+    }
+    .profile-filed mat-form-field{
+        width: 100%;
+    }
+    button.btn {
+        background: #078bd3 !important;
+        color: #fff !important;
+    }
+    .suplier-profile img {
+        border-radius: 50%;
+    height: 100px;
+    margin-top: -75px;
+    width: 100px;
+    }
+    .suplier-profile {
+        text-align: center;
+        width: 100%;
+    }
+    .profile-section {
+        max-height: initial !important;
+    }
+    .img-fulid {
+        margin-right: -25px;
+    }
+    input[type="file"] {
+        display: none;
+    }
+}

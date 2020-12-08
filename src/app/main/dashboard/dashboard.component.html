@@ -1,0 +1,130 @@
+<div id="dashboard-analytics" class="page-layout blank">
+    <div class="content">
+        <div class="left mr-lg-32">
+
+            <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+
+                <!-- Widget 2 -->
+                <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+
+                        <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                            <div class="pr-16 text-center manual_width">
+                                <div class="font-size-54 font-weight-300 line-height-1 mt-8">
+                                    {{count}}
+                                </div>
+                                <div class="h3 secondary-text">{{'Dashboard.NoOfBooksAvailable' | translate}}</div>
+                                <button mat-raised-button [routerLink]="'/library/available-books'"
+                                    class="btn_top_add fuse-white mt-24">
+                                    <span>{{'Dashboard.Visit' | translate}}</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- / Widget 2 -->
+
+                <!-- Widget 3 -->
+                <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0'">
+
+                        <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                            <div class="pr-16 manual_width text-center">
+                                <div class="font-size-54 font-weight-300 line-height-1 mt-8">
+                                    {{count1}}
+                                </div>
+                                <div class="h3 secondary-text">{{'Dashboard.NoOfBooksIssued' | translate}}</div>
+                                <button mat-raised-button [routerLink]="'/library/issue-books'"
+                                    class="btn_top_add fuse-white mt-24">
+                                    <span>{{'Dashboard.Visit' | translate}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- / Widget 3 -->
+
+                <!-- <div class="mb-48" [ngClass.lt-lg]="'mr-32'" [ngClass.xs]="'mr-0'">
+
+                    <div class="fuse-card">
+
+                        <div class="p-16">
+                            <div class="h1 pr-16">{{'Dashboard.AttendanceByMonth' | translate}}</div>
+                        </div>
+
+                        <div class="h-200">
+                            <ngx-charts-pie-chart *fuseIfOnDom [scheme]="attendance?.scheme"
+                                [results]="attendance?.devices" [doughnut]="true">
+                            </ngx-charts-pie-chart>
+                        </div>
+
+                        <div class="p-16" fxLayout="row" fxLayoutAlign="center center">
+
+                            <div class="px-16" fxLayout="column" fxLayoutAlign="start center"
+                                *ngFor="let device of attendance?.devices">
+
+                                <div class="h4 secondary-text">{{device?.name}}</div>
+                                <div class="h2 font-weight-300 py-8">{{device?.value}}</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-divider mb-0"></div>
+
+                        <div class="px-16" fxLayout="row" fxLayoutAlign="space-between center">
+                            <mat-form-field>
+                                <mat-select class="simplified" [value]="month"
+                                    (selectionChange)="onChangeMonth($event.value)">
+                                    <mat-option *ngFor="let month of years" [value]="month.value">{{month.Name}}
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                </div> -->
+            </div>
+        </div>
+        <div class="right">
+
+            <div fxLayout="row wrap" fxLayout.gt-md="column">
+                <div class="mb-48" [ngClass.lt-lg]="'mr-32'" [ngClass.xs]="'mr-0'">
+                    <!-- <div class="pb-24 font-size-18 font-weight-300">
+                        {{'sessionInfo' |translate}}
+                    </div> -->
+
+                    <div class="fuse-card">
+
+                        <div class="px-24 py-16">
+                            <div class="h1 font-weight-300">{{'academicyearandTerm' |translate}}</div>
+                        </div>
+                        <div class="px-24 ">
+                            <div class="h2 font-weight-300 py-8">{{'academicYear' |translate}}:</div>
+                            <div class="h3 font-weight-300 py-8">{{academicYear?.start_date}} {{'to' |translate}}
+                                {{academicYear?.end_date}}</div>
+                            <div class="h2 font-weight-300 py-8">{{'termName' |translate}}: {{termDetails?.name}}</div>
+                            <div class="h3 font-weight-300 py-8">{{termDetails?.start_date}} {{'to' |translate}}
+                                {{termDetails?.end_date}}</div>
+                        </div>
+                        <div class="card-divider mb-0"></div>
+                        <div class="p-24" fxLayout="row" fxLayoutAlign="space-between center">
+                            <button mat-raised-button color="accent"
+                                (click)="changeSession()">{{'changeSession' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

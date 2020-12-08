@@ -1,0 +1,94 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    control_point_duplicate
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'addFine' | translate}}</span>
+            </div>
+
+            <button mat-raised-button [routerLink]="'/library/imposed-fine-list'"
+                class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>View Fine List</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+                <!-- REACTIVE FORM EXAMPLE -->
+
+                <form class="mat-card mat-elevation-z4 p-24 form_border_radius" fxLayout="column" fxLayoutAlign="start"
+                    fxFlex="1 0 auto" name="form" [formGroup]="returnBooks" (ngSubmit)="onSubmit()">
+
+                    <!-- <div class="h2 mb-24">ADD YOUR NEW ROLE</div> -->
+
+                    <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'AssignBooks.StudentName' | translate}}</mat-label>
+                            <input matInput formControlName="studentId" required [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    Name:{{option.login_detail.first_name}}&nbsp;&nbsp;Father's
+                                    Name:{{option.father_full_name}}
+                                    &nbsp;&nbsp;Grade:{{option.class_name}}-{{option.section_name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-error>Student Name Is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+                        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                            <mat-label>{{'ReturnBook.newbook' | translate}}</mat-label>
+                            <mat-select formControlName="bookName" required>
+                                <mat-option *ngFor="let list of issuedBooksList" value="{{ list.book_id }}">
+                                    {{list.book_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>Book Name Is Required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'Amount' | translate}}</mat-label>
+                            <input matInput formControlName="amount" required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                            <mat-label>{{'paymentStatus'|translate}}</mat-label>
+                            <mat-select formControlName="payment">
+                                <mat-option value="1">Paid</mat-option>
+                                <mat-option value="0">Unpaid</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button color="accent" class="submit-button"
+                            aria-label="CREATE AN ACCOUNT">{{'AssignBooks.Submit' | translate}}</button>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <!-- / CONTENT -->
+
+        </div>

@@ -1,0 +1,40 @@
+@import "src/@fuse/scss/fuse";
+.right {
+    text-align: right;
+    margin-bottom: 10px !important;
+}
+.curriculam h4{
+    margin-bottom: 0px;
+}
+
+.curriculam {
+    margin-bottom: 20px;
+}
+
+.present_day {
+    width: 100%;
+    span {
+    float: right;
+    background: #83aa00;
+    border-radius: 50%;
+    padding: 9px;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    }
+}
+
+.absent_day {
+    width: 100%;
+    span {
+    float: right;
+    background: #ff1111;
+    border-radius: 50%;
+    padding: 9px;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    }
+}

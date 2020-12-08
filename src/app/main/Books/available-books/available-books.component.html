@@ -1,0 +1,157 @@
+<div id="orders" class="page-layout carded fullwidth ">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    shopping_basket
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'AvailableBooks.title' | translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper  ml-sm-32">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a book">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <button mat-raised-button [routerLink]="'/library/available-books-list-Pdf'"
+                class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>{{'TrialBalance.generatereport'|translate}}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'AvailableBooks.bookname' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">{{book.name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="bookNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'AvailableBooks.booknumber' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.book_number}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="isbnNo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'Book.ISBN' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.isbn_no}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Reference Column -->
+                <ng-container matColumnDef="authorName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'Book.authorName' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.author_name}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Reference Column -->
+                <ng-container matColumnDef="publisherName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'Book.publisherName' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                        <p class="text-truncate">{{book.publisher_name}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="bookCategory">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'AvailableBooks.category' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let book">
+                        <p class="text-truncate">
+                            {{book.book_category_id.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Total Price Column -->
+                <ng-container matColumnDef="booksubCategory">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-md>
+                        {{'AvailableBooks.subcategory' | translate}}</mat-header-cell>
+                    <mat-cell *matCellDef="let book" fxShow.gt-md>
+                        <p class="total-price text-truncate">
+                            {{book.book_sub_category_id.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Payment Column -->
+                <ng-container matColumnDef="delete">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>{{'actionColumn' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let order" fxShow.gt-sm>
+                        <mat-icon [routerLink]="'/library/edit-book/'+order.id" class="logo-icon s-32 mr-16">
+                            create
+                        </mat-icon>
+                        <mat-icon (click)="deleteBook(order.id)" class="logo-icon s-32 mr-16">
+                            delete
+                        </mat-icon>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Status Column -->
+                <!-- <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let order">
+                        <p class="status text-truncate h6 p-4" [ngClass]="order.status[0].color">
+                            {{order.status[0].name}}
+                        </p>
+                    </mat-cell>
+                </ng-container> -->
+
+                <!-- Date Column -->
+                <!-- <ng-container matColumnDef="date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>Date</mat-header-cell>
+                    <mat-cell *matCellDef="let order"   fxShow.gt-sm>
+                        <p class="text-truncate">
+                            {{order.date}}
+                        </p>
+                    </mat-cell>
+                </ng-container> -->
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let book; columns: displayedColumns;" class="order" matRipple>
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

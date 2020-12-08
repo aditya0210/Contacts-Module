@@ -1,0 +1,97 @@
+<div id="orders" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-16" [routerLink]="'/library/sub-category'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    account_circle
+                </mat-icon>
+                <span class="logo-text h1"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">{{'IssueBook.subcategoryList'|translate}}</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper  ml-sm-32">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a Sub-Category">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <button mat-raised-button [routerLink]="'/library/sub-category-List-Pdf'"
+                class="btn_top_add fuse-white mt-24 mt-md-0">
+                <span>{{'TrialBalance.generatereport'|translate}}</span>
+            </button>
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SubCategory.name'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let trialBalance">
+                        <p class="text-truncate">
+                            {{trialBalance.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Reference Column -->
+                <ng-container matColumnDef="book_category_name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'SubCategory.categoryname'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let trialBalance" fxShow.gt-sm>
+                        <p class="text-truncate">
+                            {{trialBalance.book_category_name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                        {{'SubCategory.CreatedDate'|translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let trialBalance">
+                        <p class="text-truncate">{{trialBalance.created_at | date}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let trialBalance; columns: displayedColumns;" class="order" matRipple>
+
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>
