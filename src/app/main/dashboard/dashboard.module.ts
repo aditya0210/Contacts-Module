@@ -22,18 +22,14 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { CategoryModule } from '../Category/category.module';
-import { BooksModule } from '../Books/books.module';
-import { ProfileModule } from '../Profile/profile.module';
-import { AttendanceModule } from '../attendance/attendance.module';
+import { MatPaginatorModule } from '@angular/material';
+
 
 const routes: Routes = [
     {
-        path: 'library/dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard]
+        path: 'dashboard',
+        component: DashboardComponent
     }
-
 ];
 
 @NgModule({
@@ -57,14 +53,12 @@ const routes: Routes = [
         MatStepperModule,
         MatCheckboxModule,
         FuseSharedModule,
+        MatPaginatorModule,
         MatTabsModule,
         MatRadioModule,
         MatCardModule,
-        TranslateModule,
-        CategoryModule,
-        BooksModule,
-        ProfileModule,
-        AttendanceModule
+        TranslateModule
+
     ],
     providers: [DashboardService]
 })

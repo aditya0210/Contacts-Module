@@ -5,8 +5,8 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DailogSessionSelectionComponent } from 'app/main/Profile/dailog-session-selection/dailog-session-selection.component';
 import { MatDialog } from '@angular/material';
+
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
@@ -17,6 +17,8 @@ import { MatDialog } from '@angular/material';
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     hide = true;
+    submitted = false;
+    loadingSpinner = false;
     /**
      * Constructor
      *
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
         public dialog: MatDialog,
         private _authService: AuthService,
         private toastr: ToastrService,
-        private router: Router
+        private router: Router,
+        private authService: AuthService
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -57,32 +60,48 @@ export class LoginComponent implements OnInit {
     /**
      * On init
      */
+
     ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
             username: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
+            password: ['', [Validators.required]],
         });
-
     }
 
-    // tslint:disable-next-line:typedef
-    onSubmit() {
-        this._authService.login(this.loginForm.value.username, this.loginForm.value.password)
-            .subscribe(
-                resData => {
-                    this.toastr.success('Successfully', 'LoggedIn', {
-                        timeOut: 1500
-                    });
-                    const dialogRef = this.dialog.open(DailogSessionSelectionComponent, {
-                        width: '500px',
-                        disableClose: true,
-                        backdropClass: 'backdropBackground'
-                    });
-                },
-                errorMessage => {
-                    this.toastr.error('Try Again', 'Email Or Password Incorrect', {
-                        timeOut: 1500
-                    });
-                });
+    get loginFormControls() {
+        return this.loginForm.controls;
+      }
+
+    onSubmit(){
+    this.loadingSpinner = true;
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      this.loadingSpinner = false;
+      return;
     }
+    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value).subscribe(res => {
+      this.loadingSpinner = false;
+      console.log(res);
+      this.toastr.success('Successfully', 'Log in', {
+        timeOut: 1500
+      });
+
+      this.router.navigate(['/dashboard']);
+
+      // if (res.user.is_superuser) {
+      //   this.router.navigate(['/admin']);
+      // } else {
+      //   this.router.navigate(['/landing']);
+      // }
+
+    }, error => {
+      console.log("error", error);
+      this.loadingSpinner = false;
+      this.toastr.error('', error.error.non_field_errors[0], {
+        timeOut: 1500
+      });
+    });
+  }
+
 }

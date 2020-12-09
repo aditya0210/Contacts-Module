@@ -22,8 +22,9 @@ fuse-sidebar {
                         .logo {
 
                             .logo-icon {
-                                width: 32px;
-                                height: 32px;
+                                object-fit: contain !important;
+                                width: 91px !important;
+                                height: 52px !important;
                             }
 
                             .logo-text {
@@ -196,4 +197,10 @@ navbar {
             }
         }
     }
+}
+
+.logo-icon {
+    object-fit: contain !important;
+    width: 91px !important;
+    height: 52px !important;
 }

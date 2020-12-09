@@ -12,10 +12,11 @@ import { ForgotPasswordModule } from '../forgot-password/forgot-password.module'
 import { ResetPasswordModule } from '../reset-password/reset-password.module';
 import { DirectiveModule } from '../directive.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { DashboardModule } from 'app/main/dashboard/dashboard.module';
 
 const routes = [
     {
-        path: 'library/auth/login',
+        path: 'auth/login',
         component: LoginComponent
     },
 ];
@@ -37,7 +38,8 @@ const routes = [
         ForgotPasswordModule,
         FuseSharedModule,
         DirectiveModule,
-        TranslateModule
+        TranslateModule,
+        DashboardModule
     ],
     exports: [
         LoginComponent,

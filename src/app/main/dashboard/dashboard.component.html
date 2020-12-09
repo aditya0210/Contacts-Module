@@ -1,11 +1,143 @@
 <div id="dashboard-analytics" class="page-layout blank">
     <div class="content">
         <div class="left mr-lg-32">
-
             <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+                <div id="orders" class="page-layout carded fullwidth ">
+                    <!-- TOP BACKGROUND -->
+                    <div class="top-bg accent"></div>
+                    <!-- / TOP BACKGROUND -->
+                
+                    <!-- CENTER -->
+                    <div class="center">
+                        <!-- HEADER -->
+                        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+                            fxLayoutAlign.gt-xs="space-between center">
+                
+                            <!-- APP TITLE -->
+                            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                    shopping_basket
+                                </mat-icon>
+                                <span class="logo-text h1"
+                                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Contacts</span>
+                            </div>
 
+                            <!-- / APP TITLE -->
+                
+                            <!-- SEARCH -->
+                            <div class="search-wrapper  ml-sm-32">
+                                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon>search</mat-icon>
+                                    <input #filter placeholder="Search for a Contact">
+                                </div>
+                            </div>
+                            <!-- / SEARCH -->
+                            <button mat-raised-button [routerLink]="'/library/available-books-list-Pdf'"
+                                class="btn_top_add fuse-white mt-24 mt-md-0">
+                                <span>{{'TrialBalance.generatereport'|translate}}</span>
+                            </button>
+                        </div>
+                        <!-- / HEADER -->
+                
+                        <!-- CONTENT CARD -->
+                        <div class="content-card">
+                            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                                fusePerfectScrollbar>
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Name">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let book">
+                                        <p class="text-truncate">{{book.name}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                
+                                <!-- Reference Column -->
+                                <ng-container matColumnDef="AccountName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        AccountName</mat-header-cell>
+                                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                                        <p class="text-truncate">{{book.book_number}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                
+                                <!-- Reference Column -->
+                                <ng-container matColumnDef="Title">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Title</mat-header-cell>
+                                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                                        <p class="text-truncate">{{book.isbn_no}}</p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Reference Column -->
+                                <ng-container matColumnDef="Phone">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Phone</mat-header-cell>
+                                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                                        <p class="text-truncate">{{book.author_name}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Reference Column -->
+                                <ng-container matColumnDef="Email">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Email</mat-header-cell>
+                                    <mat-cell *matCellDef="let book" fxShow.gt-sm>
+                                        <p class="text-truncate">{{book.publisher_name}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="OwnerName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>OwnerName
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let book">
+                                        <p class="text-truncate">
+                                            {{book.book_category_id.name}}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                
+                                <!-- Total Price Column -->
+                                
+                
+                                <!-- Status Column -->
+                                <!-- <ng-container matColumnDef="status">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                                    <mat-cell *matCellDef="let order">
+                                        <p class="status text-truncate h6 p-4" [ngClass]="order.status[0].color">
+                                            {{order.status[0].name}}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container> -->
+                
+                                <!-- Date Column -->
+                                <!-- <ng-container matColumnDef="date">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>Date</mat-header-cell>
+                                    <mat-cell *matCellDef="let order"   fxShow.gt-sm>
+                                        <p class="text-truncate">
+                                            {{order.date}}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container> -->
+                
+                                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                                <mat-row *matRowDef="let book; columns: displayedColumns;" class="order" matRipple>
+                                </mat-row>
+                               </mat-table>
+                
+
+                            <!-- <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                                [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator> -->
+                
+                        </div>
+                        <!-- / CONTENT CARD -->
+                    </div>
+                    <!-- / CENTER -->
+                </div>
+                
                 <!-- Widget 2 -->
-                <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+                <!-- <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
 
                     <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
 
@@ -15,85 +147,21 @@
                                 <div class="font-size-54 font-weight-300 line-height-1 mt-8">
                                     {{count}}
                                 </div>
-                                <div class="h3 secondary-text">{{'Dashboard.NoOfBooksAvailable' | translate}}</div>
+                                <div class="h3 secondary-text">No of users</div>
                                 <button mat-raised-button [routerLink]="'/library/available-books'"
                                     class="btn_top_add fuse-white mt-24">
                                     <span>{{'Dashboard.Visit' | translate}}</span>
                                 </button>
                             </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- / Widget 2 -->
-
-                <!-- Widget 3 -->
-                <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
-
-                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0'">
-
-                        <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start end">
-
-                            <div class="pr-16 manual_width text-center">
-                                <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                    {{count1}}
-                                </div>
-                                <div class="h3 secondary-text">{{'Dashboard.NoOfBooksIssued' | translate}}</div>
-                                <button mat-raised-button [routerLink]="'/library/issue-books'"
-                                    class="btn_top_add fuse-white mt-24">
-                                    <span>{{'Dashboard.Visit' | translate}}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- / Widget 3 -->
-
-                <!-- <div class="mb-48" [ngClass.lt-lg]="'mr-32'" [ngClass.xs]="'mr-0'">
-
-                    <div class="fuse-card">
-
-                        <div class="p-16">
-                            <div class="h1 pr-16">{{'Dashboard.AttendanceByMonth' | translate}}</div>
-                        </div>
-
-                        <div class="h-200">
-                            <ngx-charts-pie-chart *fuseIfOnDom [scheme]="attendance?.scheme"
-                                [results]="attendance?.devices" [doughnut]="true">
-                            </ngx-charts-pie-chart>
-                        </div>
-
-                        <div class="p-16" fxLayout="row" fxLayoutAlign="center center">
-
-                            <div class="px-16" fxLayout="column" fxLayoutAlign="start center"
-                                *ngFor="let device of attendance?.devices">
-
-                                <div class="h4 secondary-text">{{device?.name}}</div>
-                                <div class="h2 font-weight-300 py-8">{{device?.value}}</div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="card-divider mb-0"></div>
-
-                        <div class="px-16" fxLayout="row" fxLayoutAlign="space-between center">
-                            <mat-form-field>
-                                <mat-select class="simplified" [value]="month"
-                                    (selectionChange)="onChangeMonth($event.value)">
-                                    <mat-option *ngFor="let month of years" [value]="month.value">{{month.Name}}
-                                    </mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
                         </div>
 
                     </div>
 
                 </div> -->
+                <!-- / Widget 2 -->
+
+                <!-- Widget 3 -->
+
             </div>
         </div>
         <div class="right">
@@ -104,7 +172,7 @@
                         {{'sessionInfo' |translate}}
                     </div> -->
 
-                    <div class="fuse-card">
+                    <!-- <div class="fuse-card">
 
                         <div class="px-24 py-16">
                             <div class="h1 font-weight-300">{{'academicyearandTerm' |translate}}</div>
@@ -122,7 +190,7 @@
                             <button mat-raised-button color="accent"
                                 (click)="changeSession()">{{'changeSession' | translate}}</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

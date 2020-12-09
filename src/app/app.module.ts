@@ -31,12 +31,11 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '@angular/common';
-import { MessagingService } from './messaging.service';
 import { ErrorInterceptor } from './main/authentication/error.interceptor';
 const appRoutes: Routes = [
     {
         path: '**',
-        redirectTo: 'library/auth/login',
+        redirectTo: 'auth/login',
     }
 ];
 
@@ -81,16 +80,16 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
-        AngularFireDatabaseModule,
-        AngularFireAuthModule,
-        AngularFireMessagingModule,
-        AngularFireModule.initializeApp(environment.firebase),
+        // AngularFireDatabaseModule,
+        // AngularFireAuthModule,
+        // AngularFireMessagingModule,
+       // AngularFireModule.initializeApp(environment.firebase),
         // App modules
         LayoutModule,
         DashboardModule,
         LoginModule,
     ],
-    providers: [MessagingService, AsyncPipe, {
+    providers: [AsyncPipe, {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptorService,
         multi: true

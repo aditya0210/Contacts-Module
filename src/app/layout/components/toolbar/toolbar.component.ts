@@ -136,6 +136,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._authService.logout();
         this.router.navigate(['/admin/auth/login'])
     }
+    
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();

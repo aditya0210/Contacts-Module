@@ -47,34 +47,49 @@ export class AuthService {
     )
   }
 
-  login(email: string, password: string) {
-    var fcmToken = sessionStorage.getItem('fcmToken');
-    if (fcmToken == null) {
-      fcmToken = 'aditya'
-    }
-    return this.http.post<any>(environment.baseUrl + 'rest-auth/login/',
-      {
-        email: email,
-        password: password,
-        group_id: 12
-      })
-      .pipe(map(user => {
-        // login successful if there's a jwt token in the response
-        if (user) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
+  // login(email: string, password: string) {
+  //   var fcmToken = sessionStorage.getItem('fcmToken');
+  //   if (fcmToken == null) {
+  //     fcmToken = 'aditya'
+  //   }
+  //   return this.http.post<any>(environment.baseUrl + 'rest-auth/login/',
+  //     {
+  //       email: email,
+  //       password: password,
+  //       group_id: 12
+  //     })
+  //     .pipe(map(user => {
+  //       // login successful if there's a jwt token in the response
+  //       if (user) {
+  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
 
-          // sessionStorage.setItem('supplierId', userData.data.id);
-          sessionStorage.setItem('applicationToken', user.key);
-          sessionStorage.setItem('currentUser', JSON.stringify(user));
-          sessionStorage.setItem('profileImg', environment.baseUrl + 'media/' + user.user_detail[0].fields.photo);
-          sessionStorage.setItem('currentUserName', user.user.first_name);
-          this.currentUserSubject.next(true);
+  //         // sessionStorage.setItem('supplierId', userData.data.id);
+  //         sessionStorage.setItem('applicationToken', user.key);
+  //         sessionStorage.setItem('currentUser', JSON.stringify(user));
+  //         sessionStorage.setItem('profileImg', environment.baseUrl + 'media/' + user.user_detail[0].fields.photo);
+  //         sessionStorage.setItem('currentUserName', user.user.first_name);
+  //         this.currentUserSubject.next(true);
 
-        }
+  //       }
 
-        return user;
-      }));
+  //       return user;
+  //     }));
+  // }
+
+  login(data): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + 'auth/login/', data).pipe(map(res => {
+      localStorage.setItem('userDetails', JSON.stringify(res));
+      localStorage.setItem('token', res.key);
+      if (res.user.is_superuser) {
+        localStorage.setItem('role', 'Admin');
+      }
+      else {
+        localStorage.setItem('role', 'User');
+      }
+      return res;
+    }));
   }
+  
 
   logout() {
     // remove user from local storage to log user out

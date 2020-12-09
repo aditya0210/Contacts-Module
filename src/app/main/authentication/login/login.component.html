@@ -1,9 +1,11 @@
 <div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
 
     <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
-
+        <div class="logo">
+            <img class="logo-icon" src="../../../../assets/images/logos/pinewhitelogo.png">
+        </div>
         <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
-            <img src="assets/images/logos/Transparant-logo-2.png">
+            <img src="assets/images/logos/Artboard.svg">
         </div>
 
         <!-- <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
@@ -21,7 +23,7 @@
         <div id="login-form">
 
             <div class="logo" fxHide.gt-xs>
-                <img src="../../../../assets/images/logos/logo-300x300.png">
+                <img src="../../../../assets/images/logos/logo.png">
             </div>
 
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
@@ -48,9 +50,9 @@
                     <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Password is required
                     </mat-error>
-                    <mat-error *ngIf="loginForm.get('password').hasError('minlength')">
+                    <!-- <mat-error *ngIf="loginForm.get('password').hasError('minlength')">
                         Min Length Of Password Should Be 8 Characters
-                    </mat-error>
+                    </mat-error> -->
                 </mat-form-field>
 
                 <!-- <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"

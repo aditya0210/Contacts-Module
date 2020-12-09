@@ -13,7 +13,7 @@ toolbar {
 
     .mat-toolbar {
         position: relative;
-        background: #0a8bd3 !important;
+        background: #fff !important;
         color: white !important;
     }
 
@@ -61,6 +61,11 @@ toolbar {
     .btn_menu {
         color: #fff !important;
     }
+
+}
+
+.s-16{
+    background-color: black;
 }
 @media screen and (max-width: $break-small) {
     .logo img {
